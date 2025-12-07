@@ -9,33 +9,34 @@
                     </li>
                     <li>
                         <a class='dropdown-button' href='#' data-activates='dropdown1' style="color:#222; font-weight: 500; font-size: 15px; display: flex; align-items: center;">
-                            <i class="fa fa-user-circle" style="margin-right: 6px; color: #222;"></i> My Account <i class="fa fa-angle-down" style="margin-left: 6px; color: #222;"></i>
+                            <i class="fa fa-user-circle" style="margin-right: 6px; color: #222;"></i> Tài khoản của tôi <i class="fa fa-angle-down" style="margin-left: 6px; color: #222;"></i>
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
+
         <div class="all-drop-down">
-            <!-- Dropdown Structure -->
+            <!-- Cấu trúc menu thả -->
             <ul id='dropdown1' class='dropdown-content drop-con-man'>
                 @if(Auth::user()->role == "admin")
                     <li>
-                        <a href="{{ url('/admin') }}"><img src="{{ asset("front/images/icon/2.png") }}" alt=""> Admin Panel</a>
+                        <a href="{{ url('/admin') }}"><img src="{{ asset("front/images/icon/2.png") }}" alt=""> Quản trị viên</a>
                     </li>
                 @endif
                 <li>
-                    <a href="{{ url('/dashboard') }}"><img src="{{ asset("front/images/icon/15.png") }}" alt=""> User Dashboard</a>
+                    <a href="{{ url('/dashboard') }}"><img src="{{ asset("front/images/icon/15.png") }}" alt=""> Bảng điều khiển</a>
                 </li>
                 <li>
-                    <a href="{{ url('/dashboard/room/booking') }}"><img src="{{ asset("front/images/icon/1.png") }}" alt=""> My Room Bookings</a>
+                    <a href="{{ url('/dashboard/room/booking') }}"><img src="{{ asset("front/images/icon/1.png") }}" alt=""> Phòng đã đặt</a>
                 </li>
                 <li>
-                    <a href="{{ url('/dashboard/event/booking') }}"><img src="{{ asset("front/images/icon/17.png") }}" alt=""> My Event Bookings</a>
+                    <a href="{{ url('/dashboard/event/booking') }}"><img src="{{ asset("front/images/icon/17.png") }}" alt=""> Sự kiện đã đặt</a>
                 </li>
                 <li>
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <img src="{{ asset("front/images/icon/13.png") }}" alt=""> Log Out</a>
+                        <img src="{{ asset("front/images/icon/13.png") }}" alt=""> Đăng xuất</a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

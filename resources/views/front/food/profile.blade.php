@@ -14,48 +14,50 @@
                         <form class="col s12">
                             <div class="row">
                                 <div class="col s12 avail-title">
-                                    <h4>Check Availability</h4> </div>
+                                    <h4>Kiểm tra tình trạng phòng</h4>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12 m4 l2">
                                     <select>
-                                        <option value="" disabled selected>Select Room</option>
-                                        <option value="1">Master Suite</option>
-                                        <option value="2">Mini-Suite</option>
-                                        <option value="3">Ultra Deluxe</option>
-                                        <option value="4">Luxury</option>
-                                        <option value="5">Premium </option>
-                                        <option value="6">Normal</option>
+                                        <option value="" disabled selected>Chọn loại phòng</option>
+                                        <option value="1">Phòng Master Suite</option>
+                                        <option value="2">Phòng Mini-Suite</option>
+                                        <option value="3">Phòng Ultra Deluxe</option>
+                                        <option value="4">Phòng Luxury</option>
+                                        <option value="5">Phòng Premium</option>
+                                        <option value="6">Phòng Thường</option>
                                     </select>
                                 </div>
                                 <div class="input-field col s12 m4 l2">
                                     <select>
-                                        <option value="" disabled selected>No of adults</option>
+                                        <option value="" disabled selected>Số người lớn</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
-                                        <option value="1">4</option>
+                                        <option value="4">4</option>
                                     </select>
                                 </div>
                                 <div class="input-field col s12 m4 l2">
                                     <select>
-                                        <option value="" disabled selected>No of childrens</option>
+                                        <option value="" disabled selected>Số trẻ em</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
-                                        <option value="1">4</option>
+                                        <option value="4">4</option>
                                     </select>
                                 </div>
                                 <div class="input-field col s12 m4 l2">
                                     <input type="text" id="from" name="from">
-                                    <label for="from">Arrival Date</label>
+                                    <label for="from">Ngày đến</label>
                                 </div>
                                 <div class="input-field col s12 m4 l2">
                                     <input type="text" id="to" name="to">
-                                    <label for="to">Departure Date</label>
+                                    <label for="to">Ngày đi</label>
                                 </div>
                                 <div class="input-field col s12 m4 l2">
-                                    <input type="submit" value="submit" class="form-btn"> </div>
+                                    <input type="submit" value="Gửi" class="form-btn">
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -71,7 +73,7 @@
                     <div class="row">
                         <div class="hp-section">
                             <div class="hp-sub-tit">
-                                <h4><span>{{ $room_type->name }}</span> Room</h4>
+                                <h4><span>{{ $room_type->name }}</span> Phòng</h4>
                             </div>
                             <div class="hp-amini">
                                 <p>{{ $room_type->description }}</p>
@@ -80,8 +82,8 @@
                         @if(count($room_type->facilities) > 0)
                         <div class="hp-section">
                             <div class="hp-sub-tit">
-                                <h4><span>Facilities</span></h4>
-                                <p>All of the following facilities comes with the room.</p>
+                                <h4><span>Tiện nghi</span></h4>
+                                <p>Tất cả các tiện nghi sau đều có trong phòng.</p>
                             </div>
                             <div class="hp-amini">
                                 <ul>
@@ -94,17 +96,17 @@
                         @endif
                         <div class="hp-section">
                             <div class="hp-sub-tit">
-                                <h4><span>Overview</span></h4>
-                                <p>Following the main features of the room</p>
+                                <h4><span>Tổng quan</span></h4>
+                                <p>Các đặc điểm chính của phòng</p>
                             </div>
                             <div class="hp-over">
                                 <ul class="nav nav-tabs hp-over-nav">
                                     <li class="active">
-                                        <a data-toggle="tab" href="#home"><img src="{{ asset("front/images/icon/a8.png") }}" alt=""> <span class="tab-hide">Overview</span>
+                                        <a data-toggle="tab" href="#home"><img src="{{ asset("front/images/icon/a8.png") }}" alt=""> <span class="tab-hide">Tổng quan</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a data-toggle="tab" href="#menu"><img src="{{ asset("front/images/icon/a10.png") }}" alt=""> <span class="tab-hide">Other Features</span>
+                                        <a data-toggle="tab" href="#menu"><img src="{{ asset("front/images/icon/a10.png") }}" alt=""> <span class="tab-hide">Đặc điểm khác</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -112,11 +114,11 @@
                                     <div id="home" class="tab-pane fade in active tab-space">
                                         <div class="hp-main-overview">
                                             <ul>
-                                                <li>Occupancy: <span>Max {{ $room_type->max_adult + $room_type->max_child }} Persons</span>
+                                                <li>Sức chứa: <span>Tối đa {{ $room_type->max_adult + $room_type->max_child }} người</span>
                                                 </li>
-                                                <li>Size : <span>{{ $room_type->size }} sq. feet</span>
+                                                <li>Kích thước: <span>{{ $room_type->size }} ft²</span>
                                                 </li>
-                                                <li>Room Service : <span>{{  $room_type->room_service==true ? "Available" : "Not Available" }}</span>
+                                                <li>Dịch vụ phòng: <span>{{  $room_type->room_service==true ? "Có sẵn" : "Không có" }}</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -133,8 +135,8 @@
                         @if(count($room_type->images) > 0)
                         <div class="hp-section">
                             <div class="hp-sub-tit">
-                                <h4><span>Photo Gallery</span></h4>
-                                <p>View the actual room by following images.</p>
+                                <h4><span>Thư viện ảnh</span></h4>
+                                <p>Xem phòng thực tế qua các hình ảnh sau.</p>
                             </div>
                             <div class="">
                                 <div class="h-gal">
@@ -150,51 +152,51 @@
                         @endif
                         <div class="hp-section">
                             <div class="hp-sub-tit">
-                                <h4><span>Ratings</span></h4>
+                                <h4><span>Đánh giá</span></h4>
                                 <p>Aliquam id tempor sem. Cras molestie risus et lobortis congue. Donec id est consectetur, cursus tellus at, mattis lacus.</p>
                             </div>
                             <div class="hp-review">
                                 <div class="hp-review-left">
                                     <div class="hp-review-left-1">
-                                        <div class="hp-review-left-11">Excellent</div>
+                                        <div class="hp-review-left-11">Xuất sắc</div>
                                         <div class="hp-review-left-12">
                                             <div class="hp-review-left-13"></div>
                                         </div>
                                     </div>
                                     <div class="hp-review-left-1">
-                                        <div class="hp-review-left-11">Good</div>
+                                        <div class="hp-review-left-11">Tốt</div>
                                         <div class="hp-review-left-12">
                                             <div class="hp-review-left-13 hp-review-left-Good"></div>
                                         </div>
                                     </div>
                                     <div class="hp-review-left-1">
-                                        <div class="hp-review-left-11">Satisfactory</div>
+                                        <div class="hp-review-left-11">Đạt yêu cầu</div>
                                         <div class="hp-review-left-12">
                                             <div class="hp-review-left-13 hp-review-left-satis"></div>
                                         </div>
                                     </div>
                                     <div class="hp-review-left-1">
-                                        <div class="hp-review-left-11">Below Average</div>
+                                        <div class="hp-review-left-11">Dưới trung bình</div>
                                         <div class="hp-review-left-12">
                                             <div class="hp-review-left-13 hp-review-left-below"></div>
                                         </div>
                                     </div>
                                     <div class="hp-review-left-1">
-                                        <div class="hp-review-left-11">Below Average</div>
+                                        <div class="hp-review-left-11">Kém</div>
                                         <div class="hp-review-left-12">
                                             <div class="hp-review-left-13 hp-review-left-poor"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="hp-review-right">
-                                    <h5>Overall Ratings</h5>
-                                    <p><span>4.5 <i class="fa fa-star" aria-hidden="true"></i></span> based on 242 reviews</p>
+                                    <h5>Đánh giá tổng thể</h5>
+                                    <p><span>4.5 <i class="fa fa-star" aria-hidden="true"></i></span> dựa trên 242 đánh giá</p>
                                 </div>
                             </div>
                         </div>
                         <div class="hp-section">
                             <div class="hp-sub-tit">
-                                <h4><span>USER</span> REVIEWS</h4>
+                                <h4><span>Đánh giá</span> của người dùng</h4>
                                 <p>Aliquam id tempor sem. Cras molestie risus et lobortis congue. Donec id est consectetur, cursus tellus at, mattis lacus.</p>
                             </div>
                             <div class="lp-ur-all-rat">

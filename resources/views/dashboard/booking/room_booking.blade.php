@@ -5,8 +5,8 @@
     <div class="db-cent-3">
         <div class="db-cent-table db-com-table">
             <div class="db-title">
-                <h3><img src="{{ asset("front/images/icon/dbc5.png") }}" alt=""/> My Room Bookings</h3>
-                <p>View all of your hotel room bookings here.</p>
+                <h3><img src="{{ asset("front/images/icon/dbc5.png") }}" alt=""/> Đặt phòng của tôi</h3>
+                <p>Xem tất cả đặt phòng khách sạn của bạn tại đây.</p>
             </div>
             <div class="db-title">
                 @foreach ($errors->all() as $error)
@@ -20,14 +20,14 @@
             <table class="bordered responsive-table">
                 <thead>
                 <tr>
-                    <th>Room No</th>
-                    <th>Type</th>
-                    <th>Arrival</th>
-                    <th>Departure</th>
-                    <th>Total Cost</th>
-                    <th>Status</th>
-                    <th>Payment</th>
-                    <th>Action</th>
+                    <th>Số phòng</th>
+                    <th>Loại</th>
+                    <th>Ngày đến</th>
+                    <th>Ngày đi</th>
+                    <th>Tổng chi phí</th>
+                    <th>Trạng thái</th>
+                    <th>Thanh toán</th>
+                    <th>Thao tác</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,38 +40,38 @@
                     <td>${{ $room_booking->room_cost }}</td>
                     <td>
                         @if($room_booking->status == "pending")
-                            <span class="label label-default">Pending</span>
+                            <span class="label label-default">Đang chờ</span>
                         @elseif($room_booking->status == "checked_in")
-                            <span class="label label-primary">Checked In</span>
+                            <span class="label label-primary">Đã nhận phòng</span>
                         @elseif($room_booking->status == "checked_out")
-                            <span class="label label-success">Checked Out</span>
+                            <span class="label label-success">Đã trả phòng</span>
                         @else
-                            <span class="label label-danger">Cancelled</span>
+                            <span class="label label-danger">Đã hủy</span>
                         @endif
                     </td>
                     <td>
                         @if($room_booking->payment == true)
-                            <span class="db-success">Paid</span>
+                            <span class="db-success">Đã thanh toán</span>
                         @else
-                            <span class="db-not-success">Not Paid</span>
+                            <span class="db-not-success">Chưa thanh toán</span>
                             @if($room_booking->status !== 'cancelled')
-                                <a href="{{ route('payment.room', $room_booking->id) }}" class="btn btn-primary btn-sm">Pay Now</a>
+                                <a href="{{ route('payment.room', $room_booking->id) }}" class="btn btn-primary btn-sm">Thanh toán ngay</a>
                             @endif
                         @endif
                     </td>
                     <td>
                         @if($room_booking->status !== 'pending' && $room_booking->status !== 'cancelled')
-                            <a href="{{url('dashboard/room/booking/'.$room_booking->id.'/review')}}"><span class="label label-primary">Review</span></a>
+                            <a href="{{url('dashboard/room/booking/'.$room_booking->id.'/review')}}"><span class="label label-primary">Đánh giá</span></a>
                         @endif
                         @if($room_booking->status !== 'cancelled')
-                            <a href="{{url('dashboard/room/booking/'.$room_booking->id.'/cancel')}}"><span class="label label-danger">Cancel</span></a>
+                            <a href="{{url('dashboard/room/booking/'.$room_booking->id.'/cancel')}}"><span class="label label-danger">Hủy</span></a>
                         @endif
                     </td>
 
                 </tr>
                     @empty
                     <tr>
-                        <td>Sorry, no bookings found.</td>
+                        <td>Xin lỗi, không tìm thấy đặt phòng nào.</td>
                     </tr>
                 @endforelse
                 </tbody>

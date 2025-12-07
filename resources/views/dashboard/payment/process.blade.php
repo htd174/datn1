@@ -4,8 +4,8 @@
 <div class="db-cent-3">
     <div class="db-cent-table db-com-table">
         <div class="db-title">
-            <h3><img src="{{ asset("front/images/icon/dbc5.png") }}" alt=""/> Payment Processing</h3>
-            <p>Complete your payment for the booking.</p>
+            <h3><img src="{{ asset("front/images/icon/dbc5.png") }}" alt=""/> Xử lý thanh toán</h3>
+            <p>Hoàn tất thanh toán cho đặt chỗ của bạn.</p>
         </div>
         
         <div class="db-title">
@@ -16,9 +16,7 @@
                 <p style="color:green">{{ session('flash_title') }}, {{ session('flash_message') }}</p>
             @endif
             @if(empty($debugClientSecret))
-                <p style="color:rgb(0, 254, 76)">Payment successed!.</p>
-            @else
-                <div style="color:gray; font-size:12px;">Debug clientSecret: {{ $debugClientSecret }}</div>
+                <p style="color:rgb(0, 254, 76)">Thanh toán thành công!</p>
             @endif
         </div>
 
@@ -26,8 +24,8 @@
             <div class="col-md-8 offset-md-2">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Payment Details</h4>
-                        <p class="card-text">Amount to pay: ${{ number_format($amount, 2) }}</p>
+                        <h4 class="card-title">Chi tiết thanh toán</h4>
+                        <p class="card-text">Số tiền cần thanh toán: ${{ number_format($amount, 2) }}</p>
                         
                         <form id="payment-form" action="{{ route('payment.confirm') }}" method="POST">
                             @csrf
@@ -36,13 +34,13 @@
                             <input type="hidden" name="booking_id" value="{{ $booking->id }}">
                             
                             <div class="form-group">
-                                <label for="card-element">Credit or debit card</label>
+                                <label for="card-element">Thẻ tín dụng hoặc thẻ ghi nợ</label>
                                 <div id="card-element" class="form-control"></div>
                                 <div id="card-errors" class="invalid-feedback" role="alert"></div>
                             </div>
                             
                             <button type="submit" class="btn btn-primary" id="submit-button">
-                                Pay ${{ number_format($amount, 2) }}
+                                Thanh toán ${{ number_format($amount, 2) }}
                             </button>
                         </form>
                     </div>

@@ -211,6 +211,19 @@ th {
     z-index: 999;
     top: 0px;
 }
+
+body {
+    padding-top: 150px;
+}
+
+@media (max-width: 992px) {
+    body {
+        padding-top: 0;
+    }
+    .menu-section {
+        position: static;
+    }
+}
 .logo {
     float: left;
     width: 20%;
@@ -1009,6 +1022,7 @@ td {} .inn-com p {} .inn-com-form {} .inn-com-form form {
     font-family: 'Quicksand', sans-serif;
     border-radius: 2px;
     border: 0px;
+    margin-top: 10px;
 }
 .select-wrapper {
     position: relative;
@@ -1717,7 +1731,7 @@ td {} .inn-com p {} .inn-com-form {} .inn-com-form form {
 .dashboard {
     position: relative;
     overflow: hidden;
-    margin-top: 72px;
+    margin-top: 130px;
     margin-bottom: 55px;
     background: #f0f1f4;
 }
@@ -3879,6 +3893,7 @@ footer ul li a {
 .hp-book-in ul li:nth-child(3) a {
     border: 1px solid #bf3929;
     background: #dd4b39;
+    margin-top: 10px;
 }
 .hp-book-in ul li a i {} .hp-main-overview {} .hp-main-overview ul {
     margin-bottom: 0px;

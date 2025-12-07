@@ -18,7 +18,7 @@ return [
     'email' => env('EMAIL', 'sofitel@Hotel.com'),
     'website' => env('WEBSITE', ''),
     'video' => env('VIDEO', ''),
-    'address' => env('ADDRESS', 'Brgy.Enclaro,Binalbagan.Negros Occidental'),
+    'address' => env('ADDRESS', 'Cầu Giấy, Hà Nội'),
     'facebook' => env('FACEBOOK', '#'),
     'google' => env('GOOGLE', '#'),
     'twitter' => env('TWITTER', '#'),

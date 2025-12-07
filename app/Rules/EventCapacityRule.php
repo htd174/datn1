@@ -37,6 +37,6 @@ class EventCapacityRule implements Rule
      */
     public function message()
     {
-        return 'The capacity of event is full. Please, try booking lower number of tickets.';
+        return 'Sự kiện đã hết vé. Vui lòng đặt số lượng vé ít hơn.';
     }
 }

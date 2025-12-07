@@ -101,7 +101,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @if(Auth::user()->role == "admin" && Auth::user()->id == 1)
+                            @if(Auth::user()->role == "admin" && Auth::user()->id == 2)
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">

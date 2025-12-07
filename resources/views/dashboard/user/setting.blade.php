@@ -4,8 +4,8 @@
     <div class="db-cent-3">
         <div class="db-cent-table db-com-table">
             <div class="db-title">
-                <h3>Edit Profile</h3>
-                <p>Change your password by using following form.</p>
+                <h3>Đổi mật khẩu</h3>
+                <p>Thay đổi mật khẩu bằng biểu mẫu bên dưới.</p>
             </div>
             <div class="book-form inn-com-form db-form">
 
@@ -18,7 +18,7 @@
                                    class="validate {{ $errors->has('password') ? ' invalid' : '' }}"
                                    id="userPassword"
                                    required>
-                            <label>New password</label>
+                            <label>Mật khẩu mới</label>
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -32,7 +32,7 @@
                                    class="validate {{ $errors->has('password_confirmation') ? ' invalid' : '' }}"
                                    equalTo="#userPassword"
                                    required>
-                            <label>Confirm new password</label>
+                            <label>Xác nhận mật khẩu mới</label>
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                             <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input type="submit" value="submit" class="form-btn"> </div>
+                            <input type="submit" value="Cập nhật" class="form-btn"> </div>
                     </div>
                 {!! Form::close() !!}
             </div>

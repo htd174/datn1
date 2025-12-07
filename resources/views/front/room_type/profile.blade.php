@@ -28,19 +28,19 @@
                         @endif
                             <div class="row">
                                 <div class="col s12 avail-title">
-                                    <h4>Check Availability</h4>
-                                    <p>The final price is calculated by giving {{$room_type->discount_percentage}}% discount, adding {{config('app.service_charge_percentage')}}% service charge and adding {{config('app.vat_percentage')}}% VAT in the room's original price.</p>
+                                    <h4>Kiểm tra phòng trống</h4>
+                                    <p>Giá cuối cùng được tính bằng cách giảm {{$room_type->discount_percentage}}%, cộng thêm {{config('app.service_charge_percentage')}}% phí dịch vụ và cộng thêm {{config('app.vat_percentage')}}% VAT vào giá gốc của phòng.</p>
                                     @if(isset($arrival_date) && isset($departure_date))
                                         @php
                                             $availableRooms = $room_type->getAvailableRoomsCount($arrival_date, $departure_date);
                                         @endphp
                                         @if($availableRooms > 0)
-                                            <div class="available-rooms">Available Rooms: {{ $availableRooms }}</div>
+                                            <div class="available-rooms">Phòng còn trống: {{ $availableRooms }}</div>
                                         @else
-                                            <div class="no-rooms">No Rooms Available for Selected Dates</div>
+                                            <div class="no-rooms">Không còn phòng trống cho các ngày đã chọn</div>
                                         @endif
                                     @else
-                                        <div class="available-rooms">Available Rooms: {{ $room_type->getAvailableRoomsCount() }}</div>
+                                        <div class="available-rooms">Phòng còn trống: {{ $room_type->getAvailableRoomsCount() }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="input-field col s12 m4 l2">
                                     <select name="number_of_adult">
-                                        <option value="" disabled selected>No of adults</option>
+                                        <option value="" disabled selected>Số người lớn</option>
                                         @for($i = 1; $i <= $room_type->max_adult; $i++ )
                                         <option value="{{ $i }}" @if (Input::old('number_of_adult') == $i) selected="selected" @endif>{{ $i }}</option>
                                             @endfor
@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="input-field col s12 m4 l2">
                                     <select name="number_of_child">
-                                        <option value="" disabled selected>No of childs</option>
+                                        <option value="" disabled selected>Số trẻ em</option>
                                         @for($i = 0; $i <= $room_type->max_adult; $i++ )
                                             <option value="{{ $i }}" @if (Input::old('number_of_child') == $i && Input::old('number_of_child') != 0 ) selected="selected" @endif>{{ $i }}</option>
                                         @endfor
@@ -68,11 +68,11 @@
                                 </div>
                                 <div class="input-field col s12 m4 l2">
                                     <input type="text" id="from" name="arrival_date" value="{{ old('arrival_date') }}">
-                                    <label for="from">Arrival Date</label>
+                                    <label for="from">Ngày đến</label>
                                 </div>
                                 <div class="input-field col s12 m4 l2">
                                     <input type="text" id="to" name="departure_date" value="{{ old('departure_date') }}">
-                                    <label for="to">Departure Date</label>
+                                    <label for="to">Ngày đi</label>
                                 </div>
                                 <div class="input-field col s12 m12 l2">
                                     <div class="input-field">
@@ -81,15 +81,15 @@
                                                 $availableRooms = $room_type->getAvailableRoomsCount($arrival_date, $departure_date);
                                             @endphp
                                             @if($availableRooms > 0)
-                                                <input type="submit" value="Book Now" class="form-btn">
+                                                <input type="submit" value="Đặt ngay" class="form-btn">
                                             @else
-                                                <input type="button" value="Fully Booked" class="form-btn" disabled style="background-color: #ccc;">
+                                                <input type="button" value="Hết phòng" class="form-btn" disabled style="background-color: #ccc;">
                                             @endif
                                         @else
                                             @if($room_type->getAvailableRoomsCount() > 0)
-                                                <input type="submit" value="Book Now" class="form-btn">
+                                                <input type="submit" value="Đặt ngay" class="form-btn">
                                             @else
-                                                <input type="button" value="Fully Booked" class="form-btn" disabled style="background-color: #ccc;">
+                                                <input type="button" value="Hết phòng" class="form-btn" disabled style="background-color: #ccc;">
                                             @endif
                                         @endif
                                     </div>
@@ -109,7 +109,7 @@
                     <div class="row">
                         <div class="hp-section">
                             <div class="hp-sub-tit">
-                                <h4><span>{{ $room_type->name }}</span> Room</h4>
+                                <h4><span>{{ $room_type->name }}</span></h4>
                             </div>
                             <div class="hp-amini">
                                 <p>{{ $room_type->description }}</p>
@@ -118,8 +118,8 @@
                         @if(count($room_type->facilities) > 0)
                         <div class="hp-section">
                             <div class="hp-sub-tit">
-                                <h4><span>Facilities</span></h4>
-                                <p>All of the following facilities comes with the room.</p>
+                                <h4><span>Tiện ích</span></h4>
+                                <p>Tất cả các tiện ích sau đây đi kèm với phòng.</p>
                             </div>
                             <div class="hp-amini">
                                 <ul>
@@ -132,13 +132,13 @@
                         @endif
                         <div class="hp-section">
                             <div class="hp-sub-tit">
-                                <h4><span>Overview</span></h4>
-                                <p>Following the main features of the room</p>
+                                <h4><span>Tổng quan</span></h4>
+                                <p>Các tính năng chính của phòng</p>
                             </div>
                             <div class="hp-over">
                                 <ul class="nav nav-tabs hp-over-nav">
                                     <li class="active">
-                                        <a data-toggle="tab" href="#home"><img src="{{ asset("front/images/icon/a8.png") }}" alt=""> <span class="tab-hide">Overview</span>
+                                        <a data-toggle="tab" href="#home"><img src="{{ asset("front/images/icon/a8.png") }}" alt=""> <span class="tab-hide">Tổng quan</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -146,11 +146,11 @@
                                     <div id="home" class="tab-pane fade in active tab-space">
                                         <div class="hp-main-overview">
                                             <ul>
-                                                <li>Occupancy: <span>Max {{ $room_type->max_adult + $room_type->max_child }} Persons</span>
+                                                <li>Sức chứa: <span>Tối đa {{ $room_type->max_adult + $room_type->max_child }} người</span>
                                                 </li>
-                                                <li>Size : <span>{{ $room_type->size }} sq. feet</span>
+                                                <li>Diện tích : <span>{{ $room_type->size }} mét vuông</span>
                                                 </li>
-                                                <li>Room Service : <span>{{  $room_type->room_service==true ? "Available" : "Not Available" }}</span>
+                                                <li>Dịch vụ phòng : <span>{{  $room_type->room_service==true ? "Có" : "Không có" }}</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -161,8 +161,8 @@
                         @if(count($room_type->images) > 0)
                         <div class="hp-section">
                             <div class="hp-sub-tit">
-                                <h4><span>Photo Gallery</span></h4>
-                                <p>View the actual room by following images.</p>
+                                <h4><span>Thư viện ảnh</span></h4>
+                                <p>Xem phòng thực tế qua các hình ảnh sau.</p>
                             </div>
                             <div class="">
                                 <div class="h-gal">
@@ -178,53 +178,53 @@
                         @endif
                         <div class="hp-section">
                             <div class="hp-sub-tit">
-                                <h4><span>Ratings</span></h4>
-                                <p>If you have good experience with the hotel, please leave a review to recommend others.</p>
+                                <h4><span>Đánh giá</span></h4>
+                                <p>Nếu bạn có trải nghiệm tốt với khách sạn, vui lòng để lại đánh giá để giới thiệu cho người khác.</p>
                             </div>
                             <div class="hp-review">
                                 <div class="hp-review-left">
                                     <div class="hp-review-left-1">
-                                        <div class="hp-review-left-11">Excellent</div>
+                                        <div class="hp-review-left-11">Xuất sắc</div>
                                         <div class="hp-review-left-12">
                                             <div class="hp-review-left-13"></div>
                                         </div>
                                     </div>
                                     <div class="hp-review-left-1">
-                                        <div class="hp-review-left-11">Good</div>
+                                        <div class="hp-review-left-11">Tốt</div>
                                         <div class="hp-review-left-12">
                                             <div class="hp-review-left-13 hp-review-left-Good"></div>
                                         </div>
                                     </div>
                                     <div class="hp-review-left-1">
-                                        <div class="hp-review-left-11">Satisfactory</div>
+                                        <div class="hp-review-left-11">Đạt yêu cầu</div>
                                         <div class="hp-review-left-12">
                                             <div class="hp-review-left-13 hp-review-left-satis"></div>
                                         </div>
                                     </div>
                                     <div class="hp-review-left-1">
-                                        <div class="hp-review-left-11">Below Average</div>
+                                        <div class="hp-review-left-11">Dưới trung bình</div>
                                         <div class="hp-review-left-12">
                                             <div class="hp-review-left-13 hp-review-left-below"></div>
                                         </div>
                                     </div>
                                     <div class="hp-review-left-1">
-                                        <div class="hp-review-left-11">Below Average</div>
+                                        <div class="hp-review-left-11">Kém</div>
                                         <div class="hp-review-left-12">
                                             <div class="hp-review-left-13 hp-review-left-poor"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="hp-review-right">
-                                    <h5>Overall Ratings</h5>
+                                    <h5>Đánh giá tổng thể</h5>
                                     <p><span>
-                            {{ $room_type->getAggregatedRating() }} <i class="fa fa-star" aria-hidden="true"></i></span> based on {{$room_type->getRatingsCount() }} reviews</p>
+                            {{ $room_type->getAggregatedRating() }} <i class="fa fa-star" aria-hidden="true"></i></span> dựa trên {{$room_type->getRatingsCount() }} đánh giá</p>
                                 </div>
                             </div>
                         </div>
                         <div class="hp-section">
                             <div class="hp-sub-tit">
-                                <h4><span>USER</span> REVIEWS</h4>
-                                <p>View all reviews from our customer regarding this room.</p>
+                                <h4><span>ĐÁNH GIÁ</span> CỦA KHÁCH HÀNG</h4>
+                                <p>Xem tất cả đánh giá từ khách hàng về phòng này.</p>
                             </div>
                             <div class="lp-ur-all-rat">
                                 <ul>
@@ -234,7 +234,9 @@
                                             @foreach($room->reviews as $review)
 
                                                     <li>
-                                                        <div class="lr-user-wr-img"> <img src="{{'/storage/avatars/'.$review->room_booking->user->avatar}}" alt=""> </div>
+                                                        <div class="lr-user-wr-img">
+                                                            <img src="{{ asset('storage/avatars/' . $review->room_booking->user->avatar) }}" alt="">
+                                                        </div>
                                                         <div class="lr-user-wr-con">
                                                             <h6>{{ $review->room_booking->user->first_name." ".$review->room_booking->user->last_name }} @if($review->rating > 0)<span> {{ $review->rating }} <i class="fa fa-star" aria-hidden="true"></i></span>@endif</h6> <span class="lr-revi-date"> {{ \Carbon\Carbon::parse($review->updated_at)->diffForHumans() }}</span>
                                                             <p>{{ $review->review }}</p>
@@ -254,19 +256,19 @@
                     <!--=========================================-->
                     <div class="hp-call hp-right-com">
                         <div class="hp-call-in"> <img src="{{ asset("front/images/icon/dbc4.png") }}" alt="">
-                            <h3><span>Call us!</span> {{ config('app.phone_number') }}</h3> <small>We are available 24/7 Monday to Sunday</small> <a href="#">Call Now</a> </div>
+                            <h3><span>Gọi cho chúng tôi!</span> {{ config('app.phone_number') }}</h3> <small>Chúng tôi có mặt 24/7 từ thứ Hai đến Chủ nhật</small> <a href="#">Gọi ngay</a> </div>
                     </div>
                     <!--=========================================-->
                     <!--=========================================-->
                     <div class="hp-book hp-right-com">
                         <div class="hp-book-in">
-                            <a href="" id="bookmark_button" class="like-button"><i class="fa fa-heart-o"></i> Bookmark this listing</a> <!--<span>159 people bookmarked this place</span>-->
+                            <a href="" id="bookmark_button" class="like-button"><i class="fa fa-heart-o"></i> Đánh dấu trang này</a> <!--<span>159 người đã đánh dấu nơi này</span>-->
                             <ul>
-                                <li><a href="https://www.facebook.com/sharer.php?u={{ Request::url() }}" rel="me" title="Facebook" target="_blank"><i class="fa fa-facebook"></i> Share</a>
+                                <li><a href="https://www.facebook.com/sharer.php?u={{ Request::url() }}" rel="me" title="Facebook" target="_blank"><i class="fa fa-facebook"></i> Chia sẻ</a>
                                 </li>
                                 <li><a href="https://twitter.com/share?url={{ Request::url() }}&text={{ $room_type->name }}" rel="me" title="Twitter" target="_blank"><i class="fa fa-twitter"></i> Tweet</a>
                                 </li>
-                                <li><a href="https://plus.google.com/share?url={{ Request::url() }}" rel="me" title="Google Plus" target="_blank"><i class="fa fa-google-plus"></i> Share</a>
+                                <li><a href="https://plus.google.com/share?url={{ Request::url() }}" rel="me" title="Google Plus" target="_blank"><i class="fa fa-google-plus"></i> Chia sẻ</a>
                                 </li>
                             </ul>
                         </div>
@@ -275,7 +277,7 @@
                     <!--=========================================-->
                     <div class="hp-card hp-right-com">
                         <div class="hp-card-in">
-                            <h3>We Accept</h3> <img src="{{ asset("front/images/card.png") }}" alt=""> </div>
+                            <h3>Chúng tôi chấp nhận</h3> <img src="{{ asset("front/images/card.png") }}" alt=""> </div>
                     </div>
                     <!--=========================================-->
                 </div>
@@ -298,7 +300,7 @@
                     this.title = document.title;
                     return true;
                 } else { // webkit - safari/chrome
-                    alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != -1 ? 'Command/Cmd' : 'CTRL') + ' + D to bookmark this page.');
+                    alert('Nhấn ' + (navigator.userAgent.toLowerCase().indexOf('mac') != -1 ? 'Command/Cmd' : 'CTRL') + ' + D để đánh dấu trang này.');
                 }
             });
         });

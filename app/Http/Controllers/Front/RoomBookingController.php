@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RoomBooked;
@@ -99,9 +100,14 @@ class RoomBookingController extends FrontController
         ]);
         $user = Auth::user();
         if ($request->hasFile('avatar')) {
-            $avatarName = time().'.'.$request->avatar->extension();
-            $request->avatar->move(public_path('storage/avatars'), $avatarName);
-            $user->avatar = $avatarName;
+            // Xóa avatar cũ nếu không phải avatar mặc định
+            if (!in_array($user->avatar, ['boy.png', 'boy-1.png', 'girl.png', 'girl-1.png', 'girl-2.png','man.png', 'man-1.png', 'man-2.png', 'man-3.png'])) {
+                Storage::delete('public/avatars/' . $user->avatar);
+            }
+
+            // Lưu avatar mới vào disk 'avatar' (storage/app/public/avatars)
+            $path = $request->file('avatar')->store('', 'avatar');
+            $user->avatar = $path;
             $user->save();
         }
         return back()->with('success', 'Avatar updated successfully!');

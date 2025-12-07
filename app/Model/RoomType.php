@@ -39,7 +39,7 @@ class RoomType extends Model
 
     public function getFormattedCostAttribute()
     {
-        return '$' . number_format($this->cost_per_day, 2, '.', ',');
+        return 'S' . number_format($this->cost_per_day, 2, '.', ',');
     }
 
     public function getFormattedDiscountedPriceAttribute()

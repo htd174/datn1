@@ -55,14 +55,14 @@ class SliderController extends AdminController
             'status' => 'required|boolean'
         ];
 
-        if (!empty($request->input('image'))) {
+        if ($request->hasFile('image')) {
             $rules['image'] = 'mimes:jpeg,jpg,png';
         }
 
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return redirect()->back()
-                ->withInput($request->all)
+                ->withInput($request->all())
                 ->withErrors($validator);
         } else {
 
@@ -76,12 +76,24 @@ class SliderController extends AdminController
 
             // Image Upload
             if ($request->hasFile('image')) {
-                $path = $request->file('image')->store('','slider');
-                $slider_image = ImageManager::make('storage/slider/'.$path);
-                $slider_image->fit(1200, 500);
-                $slider_image->save(storage_path().'/app/public/slider/'.$path);
+                // Ensure directory exists
+                $directory = public_path('storage/slider');
+                if (!file_exists($directory)) {
+                    mkdir($directory, 0755, true);
+                }
 
-                $slider->name = $path;
+                // Generate unique filename
+                $filename = time().'_'.uniqid().'.'.$request->file('image')->getClientOriginalExtension();
+                
+                // Read image directly from uploaded file and resize
+                $slider_image = ImageManager::make($request->file('image')->getRealPath());
+                $slider_image->fit(1200, 500);
+                
+                // Save resized image directly to public/storage/slider
+                $imagePath = $directory.'/'.$filename;
+                $slider_image->save($imagePath);
+
+                $slider->name = $filename;
             }
             $slider->save();
 
@@ -135,7 +147,7 @@ class SliderController extends AdminController
             'status' => 'required|boolean'
         ];
 
-        if(!empty($request->input('image'))){
+        if($request->hasFile('image')){
             $rules['image'] = 'mimes:jpeg,jpg,png';
         }
 
@@ -154,14 +166,29 @@ class SliderController extends AdminController
         $slider->status = $request->input('status');
 
         if($request->hasFile('image')){
-            Storage::delete('public/slider/'.$slider->name);
+            // Delete old image
+            if (file_exists(public_path('storage/slider/'.$slider->name))) {
+                unlink(public_path('storage/slider/'.$slider->name));
+            }
 
-            $path = $request->file('image')->store('','slider');
-            $slider_image = ImageManager::make('storage/slider/'.$path);
+            // Ensure directory exists
+            $directory = public_path('storage/slider');
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            // Generate unique filename
+            $filename = time().'_'.uniqid().'.'.$request->file('image')->getClientOriginalExtension();
+            
+            // Read image directly from uploaded file and resize
+            $slider_image = ImageManager::make($request->file('image')->getRealPath());
             $slider_image->fit(1200, 500);
-            $slider_image->save(storage_path().'/app/public/slider/'.$path);
+            
+            // Save resized image directly to public/storage/slider
+            $imagePath = $directory.'/'.$filename;
+            $slider_image->save($imagePath);
 
-            $slider->name = $path;
+            $slider->name = $filename;
         }
         $slider->save();
         Session::flash('flash_title', 'Success');

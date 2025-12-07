@@ -64,8 +64,8 @@ class EventBookingController extends FrontController
 
         $this->send_email(Auth::user()->email);
 
-        Session::flash('flash_title', "Success");
-        Session::flash('flash_message', "Event has been Booked.");
+        Session::flash('flash_title', "Thành công");
+        Session::flash('flash_message', "Đã đặt vé sự kiện.");
         return redirect('/dashboard/event/booking');
 
     }

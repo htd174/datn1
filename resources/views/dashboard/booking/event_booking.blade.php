@@ -5,8 +5,8 @@
     <div class="db-cent-3">
         <div class="db-cent-table db-com-table">
             <div class="db-title">
-                <h3><img src="{{ asset("front/images/icon/dbc5.png") }}" alt=""/> My Event Bookings</h3>
-                <p>View all of your event bookings here.</p>
+                <h3><img src="{{ asset("front/images/icon/dbc5.png") }}" alt=""/> Đặt chỗ sự kiện của tôi</h3>
+                <p>Xem tất cả đặt chỗ sự kiện của bạn tại đây.</p>
             </div>
             <div class="db-title">
                 @foreach ($errors->all() as $error)
@@ -20,15 +20,15 @@
             <table class="bordered responsive-table">
                 <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Event</th>
-                    <th>Venue</th>
-                    <th>Date</th>
-                    <th>No of Tickets</th>
-                    <th>Total Cost</th>
-                    <th>Status</th>
-                    <th>Payment</th>
-                    <th>Action</th>
+                    <th>STT</th>
+                    <th>Sự kiện</th>
+                    <th>Địa điểm</th>
+                    <th>Ngày</th>
+                    <th>Số vé</th>
+                    <th>Tổng chi phí</th>
+                    <th>Trạng thái</th>
+                    <th>Thanh toán</th>
+                    <th>Thao tác</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,34 +37,34 @@
                     <td>{{ $index+1 }}</td>
                     <td>{{ $event_booking->event->name}}</td>
                     <td>{{ $event_booking->event->venue}}</td>
-                    <td>{{ $event_booking->event->date}}</td>
+                    <td>{{ \Carbon\Carbon::parse($event_booking->event->date)->format('d/m/Y') }}</td>
                     <td>{{ $event_booking->number_of_tickets }}</td>
                     <td>${{ $event_booking->total_cost }}</td>
                     <td>
                         @if($event_booking->status == true)
-                            <span class="db-success">Active</span>
+                            <span class="db-success">Đang hoạt động</span>
                         @else
-                            <span class="db-not-success">Cancelled</span>
+                            <span class="db-not-success">Đã hủy</span>
                         @endif
                     </td>
                     <td>
                         @if($event_booking->payment == true)
-                            <span class="db-success">Paid</span>
+                            <span class="db-success">Đã thanh toán</span>
                         @else
-                            <span class="db-not-success">Not Paid</span>
-                            <a href="{{ route('payment.event', $event_booking->id) }}" class="btn btn-primary btn-sm">Pay Now</a>
+                            <span class="db-not-success">Chưa thanh toán</span>
+                            <a href="{{ route('payment.event', $event_booking->id) }}" class="btn btn-primary btn-sm">Thanh toán ngay</a>
                         @endif
                     </td>
                     <td>
                         @if($event_booking->status == true)
-                            <a href="{{url('dashboard/event/booking/'.$event_booking->id.'/cancel')}}"><span class="label label-danger">Cancel</span></a>
+                            <a href="{{url('dashboard/event/booking/'.$event_booking->id.'/cancel')}}"><span class="label label-danger">Hủy</span></a>
                         @endif
                     </td>
 
                 </tr>
                     @empty
                     <tr>
-                        <td>Sorry, no bookings found.</td>
+                        <td>Xin lỗi, không tìm thấy đặt chỗ nào.</td>
                     </tr>
                 @endforelse
                 </tbody>

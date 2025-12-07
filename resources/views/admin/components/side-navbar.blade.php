@@ -17,7 +17,7 @@
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="{{'/storage/avatars/'.Auth::user()->avatar}}"/>
+                    <img src="{{ asset('storage/avatars/' . Auth::user()->avatar) }}"/>
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">

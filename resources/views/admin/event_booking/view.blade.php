@@ -31,7 +31,7 @@
                                             <tr>
                                                 <td>{{$index+1}}</td>
                                                 <td>{{ $event_booking->event->name }}</td>
-                                                <td>{{ $event_booking->event->date }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($event_booking->event->date)->format('d/m/Y') }}</td>
                                                 <td>{{ $event_booking->number_of_tickets }}</td>
                                                 <td>{{ $event_booking->user->first_name." ".$event_booking->user->last_name }}<br>
                                                     <strong>Email: </strong>{{ $event_booking->user->email }}
